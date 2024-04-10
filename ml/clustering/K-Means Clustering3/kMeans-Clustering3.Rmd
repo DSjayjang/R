@@ -1,0 +1,146 @@
+---
+title: "K-Means Clustering3"
+author: "DSjayjang"
+date: "2024-04-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# ※ K-Means Clustering in R
+
+## ■ 필요한 패키지 Read
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(NbClust) #k 개수 선택
+library(cluster) #시각화
+```
+
+## ■ 데이터 전처리
+### □ 데이터 Read & 데이터 확인
+```{r}
+wine <- read.csv('wine-clustering.csv')
+wine %>% head
+```
+```{r}
+wine %>% tail
+```
+```{r}
+wine %>% str
+```
+```{r}
+wine %>% summary
+```
+```{r}
+wine %>% names
+```
+
+<br>
+
+### □ 결측치 체크
+```{r}
+colSums(is.na(wine))
+```
+
+<br>
+
+### □ 중복 확인
+```{r}
+wine %>%
+  filter(duplicated(wine)) %>%
+  head()
+```
+
+<br>
+
+### □ untidy to tidy Data
+```{r message=FALSE, warning=FALSE}
+wine_long <- wine %>% 
+  pivot_longer(cols = names(wine), 
+               names_to = 'value_groups',
+               values_to = 'value')
+wine_long %>% head()
+```
+<br>
+
+### □ 히스토그램
+```{r}
+ggplot(wine_long, aes(x = value)) +
+  geom_histogram(bins = 20) +
+  geom_density() +
+  facet_wrap(. ~ value_groups, scales = "free")
+```
+
+<br>
+
+### □ 박스플롯 및 outiler 체크
+```{r}
+ggplot(wine_long, aes(y = value, fill = value_groups)) +
+  geom_boxplot() +
+  facet_wrap(.~value_groups, scales = 'free_y')
+```
+
+<br>
+
+### 스케일링
+```{r message=FALSE, warning=FALSE}
+wine_scaled <- scale(wine)
+head(wine_scaled)
+```
+
+<br>
+<br>
+
+## ■ Clustering 수행
+### □ k  개수 설정 
+- distance : 유클리디안거리 사용
+- min.nc : 최소 군집 개수
+- max.nc : 최대 군집 개수
+
+```{r message=FALSE, warning=FALSE}
+nb <- NbClust(wine_scaled, distance = 'euclidean', method = 'kmeans', 
+              min.nc = 2, max.nc = 10)
+```
+
+
+<br>
+
+### □ Clustering 수행
+```{r}
+set.seed(999)
+wine_km <- kmeans(wine_scaled, centers = 3, nstart = 25)
+```
+
+<br>
+
+### □ 결과 확인
+#### ◎ 각 군집 번호
+
+```{r}
+wine_km$cluster
+```
+
+#### ◎ 각 군집 사이즈
+```{r}
+wine_km$size
+```
+
+#### ◎ 각 군집 중심
+```{r}
+wine_km$centers
+```
+
+#### ◎ 스케일링 이전의 원래 값 확인
+```{r}
+aggregate(wine, by = list(cluster = wine_km$cluster), mean)
+```
+
+
+
+## ■ 시각화
+```{r}
+clusplot(wine, clus = wine_km$cluster, color = T, shade = T, labels = 1, lines = 0)
+```
+

@@ -15,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r message=FALSE, warning=FALSE}
 library(dplyr)
 library(factoextra) #elbow method
+library(cluster) #시각화
 ```
 
 <br>
@@ -32,8 +33,6 @@ head(df)
 ### □ 범주형 데이터로 변경
 ```{r}
 df$Channel <- df$Channel %>% as.factor()
-
-# 범주형 데이터로 변경
 df$Region <- df$Region %>% as.factor()
 ```
 
@@ -141,5 +140,14 @@ legend("topleft", colnames(df[, 3:8]), fill = 1:6, cex = 0.5)
 ```{r}
 df.rm.outlier$cluster <- df.kmeans$cluster
 df.rm.outlier %>% head()
+```
+
+<br>
+
+## ■ Cluster 시각화
+
+```{r}
+par(mfrow=c(1,1))
+clusplot(df.rm.outlier, clus = df.rm.outlier$cluster, color = T, shade = T, labels =1, lines =0)
 ```
 

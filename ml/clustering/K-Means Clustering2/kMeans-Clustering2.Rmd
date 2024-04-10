@@ -82,5 +82,3 @@ for(i in kClusters){
   writeJPEG(img.array, paste('kmeans_', i, 'clusters.jpeg', sep =" "))
 }
 ```
-
-
