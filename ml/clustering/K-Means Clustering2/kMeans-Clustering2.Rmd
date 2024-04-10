@@ -1,0 +1,86 @@
+---
+title: "K-Means Clustering2"
+author: "DSjayjang"
+date: "2024-04-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# ※ K-Means Clustering in R
+
+## ■ 필요한 패키지 Read
+```{r message=FALSE, warning=FALSE}
+library(jpeg)
+library(factoextra) #elbow method
+```
+
+<br>
+
+### □ ata Read, Class 확인
+```{r}
+img <- readJPEG("photo.jpg")
+class(img)
+```
+```{r}
+dim(img)
+```
+
+<br>
+
+### □ Array 데이터를 Matrix 형태로 변환
+```{r}
+imgdim <- as.vector(dim(img))
+imgdim
+```
+
+<br>
+
+```{r}
+x = rep(1:imgdim[2], each = imgdim[1])
+y = rep(imgdim[1]:1, imgdim[2])
+R = as.vector(img[,,1])
+G = as.vector(img[,,2])
+B = as.vector(img[,,3])
+
+imgRGB <- NULL
+imgRGB <- data.frame(
+  x = x,
+  y = y,
+  R = R,
+  G = G,
+  B = B
+)
+```
+
+<br>
+```{r}
+head(imgRGB)
+```
+```{r}
+tail(imgRGB)
+```
+
+<br>
+
+### □ 색상 개수 축소
+- 원하는 색상은 임의로 선택
+- img.kmeans : R, G, B데이터로 k-means 수행, 군집의 개수는 각각 3, 5, 10, 15, 30, 50
+- img.result : 각 군집의 R, G, B 평균 값들 넣어줌 (2차원 데이터)
+- img.array : img.result (2차원 데이터)를 array 값으로 다시 만들어줌
+
+```{r message=FALSE, warning=FALSE}
+kClusters <- c(3,5,10,15,30) #축소할 색상 클러스터 개수
+
+set.seed(1234)
+for(i in kClusters){
+  img.kmeans <- kmeans(imgRGB[, c("R", "G", "B")], centers = i)
+  img.result <- img.kmeans$centers[img.kmeans$cluster,]
+  img.array <- array(img.result, dim = imgdim)
+  writeJPEG(img.array, paste('kmeans_', i, 'clusters.jpeg', sep =" "))
+}
+```
+
+
