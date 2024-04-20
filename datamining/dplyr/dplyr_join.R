@@ -4,7 +4,7 @@ rm(list=ls())
 library(dplyr) 
 
 # 데이터 불러오기 및 복사본 생성
-emp_org <- read.csv("C:\\Users\\윤석\\Desktop\\패스트캠퍼스\\깃허브용\\DataSets\\R - dplyr\\emp.csv") 
+emp_org <- read.csv("emp.csv") 
 
 emp <- emp_org
 head(emp)
