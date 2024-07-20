@@ -90,9 +90,6 @@ band_members %>%
 
 
 
-# setwd
-setwd("C:\\Users\\윤석\\Desktop\\패스트캠퍼스\\[패스트캠퍼스] 프로젝트와 함께 배우는 R 데이터 분석\\Part1238 datasets")
-
 # load data
 sector_etf <- read.csv("sector_etf.csv")
 sector_etf %>% head()
