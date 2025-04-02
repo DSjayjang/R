@@ -12,30 +12,28 @@ sample(population, size = 5, replace = TRUE)
 sample(population, size = 5, replace = TRUE, prob = c(rep(0.01,8),0.91))
 
 
-
-set.seed(1234)
-
-
 # 범주형 데이터
 # death
 # (1:감염성 질환, 2: 각종 암, 3: 순환기 질환, 4: 호흡기 질환,
 # 5: 소화기 질환, 6: 각종 사고사, 7: 비뇨기 질환, 8: 정신병,
 # 9: 노환, 10: 신경계 질환)
-death <- c(rep(1,4),rep(2,33),rep(3,48),rep(4,7),rep(5,11),rep(6,5),
-           rep(7,22),rep(8,1),rep(9,1),rep(10,1))
+death <- c(rep(1,4),rep(2,33),rep(3,48),rep(4,7),rep(5,11),rep(6,5), rep(7,22),rep(8,1),rep(9,1),rep(10,1))
 death
 
-cause <- c('감영성 질환','각종 암','순환기 질환','호흡기 질환',
-           '소화기 질환','각종 사고사','비뇨기 질환','정신병',
-           '노환','신경계 질환')
+cause <- c('감영성 질환','각종 암','순환기 질환','호흡기 질환', '소화기 질환',
+           '각종 사고사','비뇨기 질환','정신병', '노환','신경계 질환')
+cause
 
-# 범주형 자료 - 도수 분포표
-# table(x)
-tab_death <- table(death) ; tab_death
-names(tab_death)<- cause
+# 범주형 자료의 요약 - 도수 분포표
+tab_death <- table(death)
 tab_death
-prop_death <-prop.table(tab_death) # 상대도수 table
+
+names(tab_death) <- cause
+tab_death
+
+prop_death <- prop.table(tab_death) # 상대도수 table
 prop_death
+
 
 # 범주형 자료 - 원형 그래프
 # pie(x, label, main, col, cex)
