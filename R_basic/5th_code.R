@@ -46,7 +46,7 @@ prop_death
 freq_table <- table(death)
 freq_table
 
-pie(prop_death,
+pie(freq_table,
     label = cause,
     main = '사망원인에 대한 원형 그래프',
     col = c('red', 'yellow'),
@@ -78,9 +78,9 @@ barplot(height = freq_table,
 # col='blue' 또는 'red' 또는 'green'과 같은 특정 색상을 지정할 수도 있음
 # 위에서 col=2 같은 경우는 숫자마다 색깔이 지정되어 있음
 # 각 범주의 막대마다 다른 색을 주기 위해 col=rainbow(10)을 이용
-# 범례의 위치를 지정할 때 줄 수 있는 값들은 'bottomright',
-# 'bottom', 'bottomleft', 'left', 'topleft', 'top', 'topright',
-# 'right', 'center' 가 있습니다.
+# 범례의 위치를 지정할 때는 
+# 'bottomright', 'bottom', 'bottomleft', 'left', 'topleft', 'top', 'topright',
+# 'right', 'center' 를 사용가능 함.
 barplot(height = freq_table,
         col = rainbow(10),
         main = '사망원인에 대한 막대 그래프',
@@ -99,7 +99,7 @@ barplot(height=freq_table,
         args.legend = list(x = 'bottomright'))
 
 # legend(x, y=NULL, legend, fill, title, border)
-# 범례를 추가할 때에는 그림이 먼저 그려져 있어야 함
+# 범례를 따로 추가할 때에는 그림이 먼저 그려져 있어야 함
 # x: 범례의 위치
 # legend: 범주의 이름
 # fill: 범례에 표기할 색 (상자 안에 색을 채워넣음)
@@ -119,9 +119,8 @@ legend(x = 'topright',
 
 
 # 범주형 자료의 요약 – 파레토 그림
-# 파레토 그림은 상대도수의 크기가 큰 값부터 작은 값으로 정렬되어
-# 있어야 함: 
-# 패키지 'qcc'에 있는 pareto.chart 함수 이용하면 됨
+# 파레토 그림은 상대도수의 크기가 큰 값부터 작은 값으로 정렬되어 있어야 함. 
+# 'qcc' 패키지의 pareto.chart 함수를 이용
 
 # pareto.chart(data, main, xlab, ylab, ylab2)
 # data: 도수분포표를 저장한 객체
@@ -161,20 +160,18 @@ stripchart(drink,
 
 
 # 연속형 자료의 요약 - 히스토그램
-# x: 히스토그램을 그릴 값의 벡터
+# x: 히스토그램을 생성할 값의 벡터
 # breaks: 구간을 나누는 기준(구간의 개수, 구간을 나누는 경계값)
 # - breaks는 단일 value를 넣었을때 'pretty breakspoint'로 인식되어 
 #       데이터의 전체 범위 중 n+1개의 적절한 구간을 나누려고 함.
 #       이는 n을 입력해도 n개의 구간이 나오지 않을 수 있음.
 
-# freq: 히스토그램을 그리는 기준(NULL 혹은 TRUE일 경우, 빈도수를 기준으로 그림)
+# freq: 히스토그램을 그리는 기준
 
-# 빈도수 기준(3개의 코드 모두 같은 결과)
+# 빈도 히스토그램
 hist(drink)
-hist(drink, freq = T)
-hist(drink, prob = F)
 
-# 밀도 기준(2개의 코드 모두 같은 결과)
+# 밀도 히스토그램
 hist(drink, freq = F)
 hist(drink, prob = T)
 
@@ -187,6 +184,10 @@ hist(drink,
 
 # 여러 개의 그림을 보고 싶을 때
 par(mfrow = c(2,1)) # 2x1
+
+hist(drink)
+stripchart(drink, main = 'drink에 대한 점도표', pch = 16)
+
 par(mfrow = c(1,1)) # 1x1
 
 
@@ -197,14 +198,14 @@ par(mfrow = c(1,1)) # 1x1
 # y: y축 좌표
 # ...: 추가적인 그래프 파라미터
 
-# 빈도 기준
+# 빈도 기준 히스토그램
 hist <- hist(drink, freq = T)
 hist
 summary(hist)
 lines(x = hist$mids,
       y = hist$counts,
       type = 'b',
-      pch = 20, lty = 2)
+      pch = 16, lty = 6)
 
 # type b: line with point 
 # type c: line without point
