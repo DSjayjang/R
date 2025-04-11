@@ -106,6 +106,7 @@ quantile(x, prob = seq(0.1, 1.0, by = 0.1))
 
 n = length(x)
 p = 0.75
+n*p
 floor(n*p) # 정수 부분
 x[floor(n*p) + 1] # 제 75 백분위수
 quantile(x, prob = 0.75, type = 2) # 제 75 백분위수
@@ -139,7 +140,7 @@ cv_x3 <- (sd(x3) / mean(x3)) * 100; cv_x3 # 키에 비해 몸무게는 개인차
 # 상자그림(boxplot)
 ## 하나의 상자그림 그리기
 x <- c(42,40,38,37,43,39,78,38,45,44,40,38,41,35,31,44); x
-?boxplot(x)
+boxplot(x)
 
 
 ## 여러 개의 상자그림 그리기
