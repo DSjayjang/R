@@ -79,7 +79,7 @@ sqrt(sum(dev^2)/(length(data)-1)); sd(data)
 
 # 6. 데이터 프레임 [총 20점]
 # (a) 바탕화면에 “test” 폴더를 만든 후, 해당 폴더를 working directory로 설정하시오. [2점]
-# (b) i-class에 주어진 mtcars.csv 파일을 test 폴더에 넣고, df 변수에 데이터를 저장하시오. [2점]
+# (b) i-class에 주어진 mtcars.csv 파일을 test 폴더에 넣고, 변수 df에 데이터를 저장하시오. [2점]
 # (c) df의 차원(행과 열)을 출력하시오. [3점]
 # (d) df의 mpg변수에 대해 평균과 분산을 출력하시오. [4점]
 # (e) df의 qsec변수에 대해 boxplot을 출력하고, 이상치가 있는지 판단하시오. [4점]
