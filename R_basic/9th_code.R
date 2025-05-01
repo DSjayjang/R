@@ -1,12 +1,22 @@
 rm(list=ls())
+
 # 두 변수 자료의 요약
 ## 두 범주형 자료의 요약: 분할표
+write.csv(cars, 'cars.csv', row.names = F)
+write.csv(iris, 'iris.csv', row.names = F)
 
-mtcars
-iris
 
-data <- iris
-head(data)
+setwd('C:\\Users\\linde\\Desktop\\Lecture\\1-2\\5. 기초통계실습1\\2. 강의자료')
+iris <- read.csv('iris.csv', header = TRUE)
+
+## 데이터 확인
+head(iris)
+dim(iris)
+str(iris)
+summary(iris)
+
+## 데이터 전처리
+
 
 data$Sepal.Length < 6
 
@@ -31,95 +41,86 @@ prop.table(tab)
 mosaicplot(tab, main='Species vs. Sepal.Length_6', color=c('grey','black'))
 
 
-## 두 연속형 자료의 요약: 산점도
-rm(list=ls())
+# 두 연속형 자료의 요약: 산점도
+## 데이터 불러오기
+setwd('C:\\Users\\linde\\Desktop\\Lecture\\1-2\\5. 기초통계실습1\\2. 강의자료')
+cars <- read.csv('cars.csv', header = TRUE)
 
-height <- c(1.72, 1.80, 1.66, 1.95, 1.70, 1.50, 1.55, 1.71)
-weight <- c(55, 75 ,65, 86, 80, 50, 58, 71)
-plot(height, weight)
+## 데이터 확인
+head(cars)
+str(cars)
+summary(cars)
 
-install.packages('mlbench')
-library(mlbench)
+## 변수 x, y
+x <- cars$speed; x
+y <- cars$dist; y
 
-head(Ozone)
-cars
-plot(cars$speed, cars$dist)
 
-plot(Ozone$V8, Ozone$V9)
+
+# 산점도 출력
+plot(x, y)
 
 # x,y축의 레이블 추가
-plot(Ozone$V8, Ozone$V9,
-     xlab = 'temp at Sandburg', ylab = 'temp at El Monte')
+plot(x, y,
+     xlab = 'speed', ylab = 'distance')
 
 # 타이틀 추가
-plot(Ozone$V8, Ozone$V9,
-     xlab = 'temp at Sandburg', ylab = 'temp at El Monte',
-     main = 'Ozone')
+plot(x, y,
+     xlab = 'speed', ylab = 'distance',
+     main = 'Speed and Stopping Distance of Cars')
 
 # 점의 종류 변경
-plot(Ozone$V8, Ozone$V9,
-     xlab = 'temp at Sandburg', ylab = 'temp at El Monte',
-     main = 'Ozone',
+plot(x, y,
+     xlab = 'speed', ylab = 'distance',
+     main = 'Speed and Stopping Distance of Cars',
      pch = 25)
 
 # 점의 크기 변경
-plot(Ozone$V8, Ozone$V9,
-     xlab = 'temp at Sandburg', ylab = 'temp at El Monte',
-     main = 'Ozone',
-     pch = 25, cex = 0.5)
+plot(x, y,
+     xlab = 'speed', ylab = 'distance',
+     main = 'Speed and Stopping Distance of Cars',
+     pch = 25, cex = 1.5)
 
 # 점의 색상 변경
 colors()
-plot(Ozone$V8, Ozone$V9,
-     xlab = 'temp at Sandburg', ylab = 'temp at El Monte',
-     main = 'Ozone',
-     pch = 25, col = 'violet')
+plot(x, y,
+     xlab = 'speed', ylab = 'distance',
+     main = 'Speed and Stopping Distance of Cars',
+     pch = 25, cex = 1.5, col = 'violet')
 
 # 좌표축의 범위
-colors()
-plot(Ozone$V8, Ozone$V9,
-     xlab = 'temp at Sandburg', ylab = 'temp at El Monte',
-     main = 'Ozone',
-     pch = 25, col = 'violet',
-     xlim = c(0, 100), ylim = c(0, 100))
-
-
-
-
-plot(iris$Sepal.Length, iris$Sepal.Width)
-plot(iris$Sepal.Length, iris$Petal.Width, main='ScatterPlot')
-plot(iris$Petal.Length, iris$Petal.Width, pch=16)
-plot(iris$Petal.Length, iris$Sepal.Width)
-
-par(mfrow=c(2,2)) # 여러 그림을 한 페이지에 그리는 방법 
-plot(iris$Sepal.Length, iris$Sepal.Width)
-plot(iris$Sepal.Length, iris$Petal.Width)
-plot(iris$Petal.Length, iris$Petal.Width)
-plot(iris$Petal.Length, iris$Sepal.Width)
-
-par(mfrow=c(1,1)) # 복구 
+plot(x, y,
+     xlab = 'speed', ylab = 'distance',
+     main = 'Speed and Stopping Distance of Cars',
+     pch = 25, cex = 1.5, col = 'violet',
+     xlim = c(0, 30), ylim = c(0, 150))
 
 # 산점도 행렬
-pairs(~Sepal.Length+Sepal.Width+Petal.Length+Petal.Width, data=iris)
-pairs(~Sepal.Length+Sepal.Width+Petal.Length+Petal.Width, data=iris, pch=16)
-pairs(~Sepal.Length+Sepal.Width+Petal.Length+Petal.Width, data=iris, pch=21,col=c(1,2,3))
-
-pairs(~Sepal.Length+Sepal.Width+Petal.Length+Petal.Width, data=iris, 
-      pch=21,col=c(1,2,3)[iris$Species])
-
-pairs(~Sepal.Length+Sepal.Width+Petal.Length+Petal.Width, data=iris, 
-      pch=c(16, 17, 18)[iris$Species],col=c(1,2,3)[iris$Species])
+pairs(~speed + dist, data = cars)
+pairs(~Sepal.Length + Sepal.Width + Petal.Length + Petal.Width, data = iris)
 
 
 
 # 상관계수
-cor(iris$Sepal.Length,iris$Petal.Width)
+cor(x, y)
 
-a <- iris$Sepal.Length-mean(iris$Sepal.Length)
-Sxx <- sum(a*a);Sxx
-b <- iris$Petal.Width-mean(iris$Petal.Width)
-Syy <- sum(b*b);Syy
-Sxy <- sum(a*b);Sxy
-r <- Sxy/(sqrt(Sxx*Syy));r
-plot(iris$Sepal.Length,iris$Petal.Width)
+## 상관계수 직접 계산하기
+# 1. 평균
+x_bar <- mean(x); x_bar
+y_bar <- mean(y); y_bar
+
+# 2. 편차
+x_dev <- x - x_bar; x_dev
+y_dev <- y - y_bar; y_dev
+
+# 3. 편차제곱합
+Sxx <- sum(x_dev^2); Sxx
+Syy <- sum(y_dev^2); Syy
+Sxy <- sum(x_dev * y_dev); Sxy
+
+# 4. 상관계수
+corr <- Sxy / sqrt(Sxx * Syy)
+
+# 결과 확인
+corr; cor(x, y)
 
