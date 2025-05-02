@@ -1,16 +1,16 @@
 rm(list=ls())
 
 # 두 범주형 자료의 요약: 분할표
-data = data.frame(x = sample(c('a1', 'a2', 'a3'), 200, replace = T),
-                  y = sample(c('b1', 'b2'), 200, replace = T))
-data
+data <- data.frame(x = sample(c('a1', 'a2', 'a3'), 200, replace = T),
+                   y = sample(c('b1', 'b2'), 200, replace = T))
+head(data)
 
 ## 변수 하나에 대한 표 (도수분포표)
-mytable = table(data$x); mytable
+mytable <- table(data$x); mytable
 prop.table(mytable)
 
 ## 변수 두개에 대한 표 (분할표)
-mytable = table(data$x, data$y); mytable
+mytable <- table(data$x, data$y); mytable
 
 ## 비율로 표시하기
 prop.table(mytable)

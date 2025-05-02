@@ -52,9 +52,8 @@ vec <- c(6,NA,91,97,92,8,NA,85,NA,NA,NA,15,96,71,NA,44,62,53,49,3,93,NA,46,41,NA
 sum(vec, na.rm = T)
 sum(is.na(vec))
 
-vec[which(is.na(vec))] <- 999
+vec[is.na(vec)] <- 999
 mean(vec)
-
 
 
 
@@ -66,10 +65,10 @@ data <- c(80,100,43,2,36,9,42,50,53,32,84,18,78,17,98,5,47,96,49,8,57,86,90,11,4
 # (b) 편차(deviation)을 계산하시오. [5점]
 # (c) 표본 분산을 계산하시오 (var() 사용 금지). [5점]
 # (d) 표본 표준편차를 계산하시오 (sd() 사용 금지). [5점]
-sum(data) / length(data); mean(data)
-dev <- data - (mean(data)); dev
-sum(dev^2)/(length(data)-1); var(data)
-sqrt(sum(dev^2)/(length(data)-1)); sd(data)
+x_bar <- sum(data) / length(data); x_bar; mean(data)
+dev <- data - x_bar; dev
+var_x <- sum(dev^2)/(length(data)-1);var_x; var(data)
+sqrt(var_x); sd(data)
 
 
 
@@ -114,9 +113,12 @@ cal_median <- function(x) {
   x <- sort(x)
   n <- length(x)
   
+  # 홀수
   if (n %% 2 == 1) {
     return(x[(n + 1) / 2])
   }
+  
+  # 짝수
   else {
     idx1 <- n/2
     idx2 <- n/2 + 1
