@@ -115,17 +115,18 @@ cal_median <- function(x) {
   
   # 홀수
   if (n %% 2 == 1) {
-    return(x[(n + 1) / 2])
+    median = x[(n+1)/2]
+    
+    return(median)
   }
   
   # 짝수
   else {
     idx1 <- n/2
     idx2 <- n/2 + 1
+
+    median = (x[idx1] + x[idx2]) / 2    
     
-    return((x[idx1] + x[idx2]) / 2)
+    return(median)
   }
 }
-
-
-
