@@ -1,16 +1,18 @@
 rm(list=ls())
 set.seed(2025)
 
-# 베르누이 분포 (bernoulli distribution)
-sample(c('succ', 'fail'), 1, prob = c(0.6, 0.4))
+# 베르누이 시행 / 베르누이 분포
+sample(c('succ', 'fail'), size = 1, prob = c(0.6, 0.4))
+sample(c(1, 0), size = 1, prob = c(0.6, 0.4))
 
 
 # ----------------------------------------------------------------
 # ----------------------------------------------------------------
 
 # 이항 분포 (binomial distribution)
-sample(c('succ', 'fail'), 10, replace = T, prob = c(0.6, 0.4))
-sum(sample(c(1, 0), 10, replace = T, prob = c(0.6, 0.4)))
+sample(c(1, 0), size = 10, replace = T, prob = c(0.6, 0.4))
+sum(sample(c(1, 0), size = 10, replace = T, prob = c(0.6, 0.4)))
+
 rbinom(n = 1, size = 10, prob = 0.6)
 
 # rbinom(n, size, prob)
@@ -29,6 +31,11 @@ Z <- rbinom(n = n_rn, size = n_trials, prob = p3); Z
 table(X)
 table(Y)
 table(Z)
+
+par(mfrow=c(1,3))
+barplot(table(X))
+barplot(table(Y))
+barplot(table(Z))
 
 # 이항분포의 기댓값
 # E[X] = np
@@ -94,13 +101,3 @@ p <- pbinom(0:5, size = 5, prob = 0.5); p
 qbinom(p, size = 5, prob = 0.5)
 
 
-# ----------------------------------------------------------------
-# ----------------------------------------------------------------
-
-# 초기하 분포
-
-
-# ----------------------------------------------------------------
-# ----------------------------------------------------------------
-
-# 포아송 분포
