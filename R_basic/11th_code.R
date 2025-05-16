@@ -61,9 +61,9 @@ var(Z)
 
 
 # dbinom(x, size, prob)
-# 성공 확률이 prob이고, size 만큼 시행했을 때 x 번 성공할 확률
-dbinom(3, size = 5, prob = 0.5) # 동전을 5번 던져 앞면이 3번 나올 확률
-dbinom(0:5, size = 5, prob = 0.5) # 동전을 5번 던져 앞면이 0,1,2,3,4,5번 나올 확률
+# 성공 확률이 prob이고, size 만큼 시행했을 때 X번 성공할 확률
+dbinom(3, size = 5, prob = 0.5) # e.g. 동전을 5번 던져 앞면이 3번 나올 확률
+dbinom(0:5, size = 5, prob = 0.5) # e.g. 동전을 5번 던져 앞면이 0,1,2,3,4,5번 나올 확률
 
 ############################################
 ## 이산형 확률 변수의 기댓값
@@ -78,8 +78,11 @@ sum((0:5 - mu)^2 * dbinom(0:5, size = 5, prob = 0.5))
 5 * 0.5 * 0.5
 ############################################
 
-# 확률질량함수
+# 확률질량함수 시각화
+par(mfrow=c(1,1))
 barplot(dbinom(0:5, size = 5, prob = 0.5))
+
+par(mfrow=c(1,3))
 barplot(dbinom(0:30, size = 30, prob = 0.5))
 barplot(dbinom(0:30, size = 30, prob = 0.3))
 barplot(dbinom(0:30, size = 30, prob = 0.7))
