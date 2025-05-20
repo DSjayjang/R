@@ -8,4 +8,4 @@ white_ball <- 4
 black_ball <- 6
 n <- 3
 
-rhpyer(nn = n_rn, m = white_ball, n = black_ball, k = n)
+rhyper(nn = n_rn, m = white_ball, n = black_ball, k = n)
