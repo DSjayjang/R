@@ -41,28 +41,14 @@ var(X)
 
 # dhyper(x, m, n, k)
 # 흰공이 m개, 검은공이 n개일 때, k개를 뽑아 x개가 흰공(성공)일 확률
-# e.g. 흰 공이 5개, 검은 공이 2개일 때, 3개를 뽑아 2개가 흰 공(성공)일 확률
+# e.g. 흰 공이 10개, 검은 공이 2개일 때, 3개를 뽑아 2개가 흰 공(성공)일 확률
 dhyper(2, m = 10, n = 2, k = 3) 
-# e.g. 흰 공이 5개, 검은 공이 2개일 때, 3개를 뽑아 0,1,2,3개가 흰 공(성공)일 확률
+# e.g. 흰 공이 10개, 검은 공이 2개일 때, 3개를 뽑아 0,1,2,3개가 흰 공(성공)일 확률
 dhyper(0:3, m = 10, n = 2, k = 3) 
-
-
-############################################
-## 이산형 확률 변수의 기댓값
-## sum(X * P(X=x))
-mu <- sum(0:3 * dhyper(0:3, m = 10, n = 2, k = 3)); mu
-## 초기하 분포의 기댓값: E[X] = n*p = n*(D/N)
-3 * (10/12)
-
-## 이산형 확률 변수의 분산
-sum((0:3 - mu)^2 * dhyper(0:3, m = 10, n = 2, k = 3))
-## 초기하 분포의 분산: Var[X] = np(1-p) = n * (D/N) * ((N-n)/(N-1))
-3 * (10/12) * (1-10/12) * (9/11)
-############################################
 
 # 확률질량함수 시각화
 par(mfrow=c(1,1))
-barplot(dhyper(0:10, m = 10, n = 10, k = 10))
+barplot(dhyper(0:5, m = 10, n = 5, k = 5))
 
 # phyper(q, m, n, k, lower.tail = TRUE)
 # 초기하 분포의 누적확률 계산 # P[X <= x]
@@ -167,32 +153,12 @@ qpois(p, lambda = 3)
 
 
 # Approximation to Poisson(m -> infty, p -> 0)
-bin1 <- rbinom(n = 1000, size = 10, prob = 3/10); bin1
-table(bin1) / 1000
-
-bin2 <- rbinom(n = 1000, size = 1000, prob = 3/1000); bin2
-table(bin2) / 1000
-
-bin3 <- rbinom(n = 1000, size = 100000, prob = 3/100000); bin3
-table(bin3) / 1000
-
-pois <- rpois(n = 1000, lambda = 3); pois
-table(pois) / 1000
-
-table(bin1) / 1000
-table(bin2) / 1000
-table(bin3) / 1000
-table(pois) / 1000
-
-mean(bin1); mean(bin2); mean(bin3); mean(pois)
-var(bin1); var(bin2); var(bin3); var(pois)
-
-par(mfrow = c(1, 4))
-b_points <- seq(from = 0, to = 13, by = 1) - 0.5; b_points
-hist(bin1, breaks = b_points, freq = F, main = "X~Binomial(10,0.3)")
-hist(bin2, breaks = b_points, freq = F, main = "X~Binomial(1000,0.003)")
-hist(bin3, breaks = b_points, freq = F, main = "X~Binomial(100000,0.00003)")
-hist(pois, breaks = b_points, freq = F, main = "X ~ Poisson(3)")
+# e.g.
+# 하루 동안 3,000명이 복권을 샀을 때, 당첨될 확률이 0.002인 경우,
+# X ~ bin(3000, 0.002)
+# Y ~ pois(6)
+dbinom(5, 3000, 0.002)
+dpois(5, 6)
 
 
 par(mfrow=c(1,1))
@@ -204,13 +170,11 @@ points(0:10, bin1, type='l', col = 'red')
 
 pois2 <- dpois(x = 0:10, lambda = 3); pois2
 bin2 <- dbinom(x = 0:10, size = 100, prob = 3/100); bin2
-
 plot(0:10, pois2, 'l')
 points(0:10, bin2, type='l', col = 'red')
 
 pois3 <- dpois(x = 0:10, lambda = 3); pois3
 bin3 <- dbinom(x = 0:10, size = 1000, prob = 3/1000); bin3
-
 plot(0:10, pois3, 'l')
 points(0:10, bin3, type='l', col = 'red')
 
