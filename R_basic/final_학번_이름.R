@@ -28,8 +28,8 @@
 
 # 2. 표본상관계수 [총 30점]
 # (a) i-class에 주어진 anscombe.csv 파일을 불러와 변수 anscombe에 저장하시오. [1점]
-# (b) 변수 x1과 y1에 대한 표본평균을 계산하시오. [2점]
-# (c) 변수 x1과 y1에 대한 편차(deviation)를 계산하시오. [2점]
+# (b) 변수 x1, y1 각각의 표본평균을 계산하시오. [2점]
+# (c) 변수 x1, y1 각각의 편차(deviation)를 계산하시오. [2점]
 # (d) 변수 x1과 y1에 대한 편차제곱합을 계산하고, 변수 Sxy, Sxx, Syy에 저장하시오. [5점]
 #     (여기서 Sxx, Syy는 Sum of squares를, Sxy는 Sum of cross products를 의미.)
 # (e) 변수 x1과 y1에 대한 표본상관계수를 계산하시오 (cor() 사용금지). [10점]
