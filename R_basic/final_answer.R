@@ -99,7 +99,7 @@ var_Y <- sum(dev_Y^2 * Y_margin); var_Y # 모분산
 
 # (a) P[X = 5]을 계산하시오. [4점]
 # (b) 초기하분포가 이항분포로 근사될 수 있다는 점을 이용하여 P[X = 5]의 값을 구하고, (a)의 값과 비교하시오. [6점]
-# (c) 위 문제를 고려했을 때, 그림과 같이 출력하여 초기하분포와 이항분포가 유사함을 보이고, 어떤 조건에서 근사가 잘 되는지 설명하시오. [10점]
+# (c) 위 문제를 고려했을 때, 그림과 비슷하게 출력하여 초기하분포와 이항분포가 유사함을 보이고, 어떤 조건에서 근사가 잘 되는지 설명하시오. [10점]
 dhyper(x = 5, m = 400, n = 600, k = 10)
 
 dbinom(x = 5, size = 10, prob = 0.4)
@@ -108,7 +108,7 @@ set.seed(2025)
 par(mfrow=c(1,2))
 
 hyper <- rhyper(1000, m = 400, n = 600, k = 10)
-barplot(table(hyper), main = "X ~ Hypergemotric")
+barplot(table(hyper), main = "X ~ Hypergeometric")
 bin <- rbinom(1000, size = 10, prob = 0.4)
 barplot(table(bin), main = "X ~ Binomial")
 # 모집단 크기(N=1000)가 표본 크기(k=10)에 비해 충분히 크기 때문에 복원 추출(이항분포)로 근사해도 큰 오차가 없다.
