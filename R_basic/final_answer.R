@@ -66,6 +66,8 @@ par(mfrow = c(1, 1))
 
 
 
+rm(list=ls())
+setwd('C:\\Users\\linde\\OneDrive\\Desktop\\1. Lecture_DataScience\\1-2\\5. 기초통계실습1\\5. 시험\\기말고사')
 
 
 # 3. 결합 확률분포와 주변 확률분포 [총 20점]
@@ -90,6 +92,8 @@ var_Y <- sum(dev_Y^2 * Y_margin); var_Y # 모분산
 
 
 
+rm(list=ls())
+setwd('C:\\Users\\linde\\OneDrive\\Desktop\\1. Lecture_DataScience\\1-2\\5. 기초통계실습1\\5. 시험\\기말고사')
 
 
 # 4. 초기하분포와 이항분포 [총 20점]
@@ -112,7 +116,7 @@ barplot(table(hyper), main = "X ~ Hypergeometric")
 bin <- rbinom(1000, size = 10, prob = 0.4)
 barplot(table(bin), main = "X ~ Binomial")
 # 모집단 크기(N=1000)가 표본 크기(k=10)에 비해 충분히 크기 때문에 복원 추출(이항분포)로 근사해도 큰 오차가 없다.
-
+2/3/5
 
 
 
@@ -132,7 +136,7 @@ pbinom(650, size = 1000, prob = 0.6) - pbinom(599, size = 1000, prob = 0.6)
 pnorm(q = 590.5, mean = 600, sd =  sqrt(240)) - pnorm(q = 589.5, mean = 600, sd =  sqrt(240))
 # 정규분포는 연속형 확률분포인 반면, 이항분포는 이산형 확률분포이기 때문에 정확한 확률 값(P[X=590])을 계산할 수 없다.
 # 따라서 연속성 수정을 적용하여 P[589.5 <= X <= 590.5]로 근사하며, 이로 인해 약간의 차이가 발생한다.
-
+해석 1점
 
 
 
